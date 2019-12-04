@@ -109,6 +109,10 @@ cpdef object cypesq(long sample_rate, np.ndarray[float, ndim=1, mode="c"] ref_da
     pesq_measure(&ref_info, &deg_info, &err_info, &error_flag, &error_type);
     if error_flag!=0:
         return -1
+        
+    if err_info.mode == NB_MODE :
+        return err_info.pesq_mos, err_info.mapped_mos
+
     return err_info.mapped_mos
 
 
